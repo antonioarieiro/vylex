@@ -7,8 +7,14 @@ interface ButtonProps {
 
 export const ButtonContainer = styled.button<ButtonProps>`
   font-weight: 600;
-  background-color: ${({ type }) =>
-    type === "alert" ? "#f1ca45" : type === "subtle" ? "none" : "#0052cc"};
+  background-color: ${({ type, disabled }) =>
+    disabled
+      ? "#ccc"
+      : type === "alert"
+      ? "#f1ca45"
+      : type === "subtle"
+      ? "none"
+      : "#0052cc"};
   padding: 4px;
   color: ${({ type }) => (type === "subtle" ? " #000" : " #fff")};
   border-radius: 4px;
@@ -177,21 +183,25 @@ export const Layout = styled.div`
 
 export const LayoutHeader = styled.div`
   display: flex;
+  position: fixed;
+  top: 0;
+  width: 100%;
   align-items: center;
   justify-content: center;
   border-bottom: 1px solid #ebecf0;
   background-color: #ffffff;
   padding: 10px;
-  background-color: #f0f0f0;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
   gap: 15px;
 `;
 
 export const LayoutBody = styled.div`
+  margin-top: 50px;
   padding-top: 10px;
   background: #eceff1;
   padding: 10px;
   width: 100%;
-  height: 100vh;
+
   overflow: hidden;
 `;
 
@@ -213,7 +223,7 @@ export const ListContainer = styled.div`
 
 export const ToastContainer = styled.div`
   display: flex;
-  position: absolute;
+  position: fixed;
   right: 0;
   top: 10px;
   background: green;
@@ -223,4 +233,23 @@ export const ToastContainer = styled.div`
   gap: 4px;
   display: flex;
   align-items: center;
+`;
+
+export const ProgressBarContainer = styled.div`
+  position: relative;
+  width: 100%;
+  height: 20px;
+  background-color: #f5f5f5;
+  border-radius: 4px;
+  overflow: hidden;
+`;
+
+export const ProgressBar = styled.div<{ progress: number }>`
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: ${(props) => props.progress}%;
+  background-color: #007bff;
+  transition: width 0.5s ease-in-out;
 `;
