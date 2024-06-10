@@ -1,5 +1,6 @@
 import Button from "@/components/button";
 import DefaultText from "@/components/typograph/DefaultText";
+import _ from "lodash";
 import TitleH2 from "@/components/typograph/Subtitle";
 import {
   ListContainer,
@@ -14,7 +15,7 @@ import { useRouter } from "next/router";
 import DscInput from "@/components/Input";
 import DscTextArea from "@/components/textArea";
 import Toast from "@/components/toast";
-import { deleteItem, editItem } from "../api/api";
+import { deleteItem, editItem, searchItems } from "../api/api";
 import BreadCrumb from "@/components/breadCrumb";
 
 interface Item {
@@ -23,6 +24,7 @@ interface Item {
   description: string;
 }
 export default function ListItems() {
+  const debounce = _.debounce;
   const [openDeleteModal, setOpenDeleteModal] = React.useState(false);
   const [openEditModal, setOpenEditModal] = React.useState(false);
   const [initialItems, setInitialItems] = React.useState<Item[]>([]);
@@ -103,17 +105,26 @@ export default function ListItems() {
     }));
   };
 
-  const handleSearch = (name: string) => {
+  const debouncedSearch = debounce(async (name: string) => {
     if (!name) {
       setInitialItems(items);
       return;
     }
 
-    const filteredItems = items.filter((item) =>
-      item.name.toLowerCase().includes(name.toLowerCase())
-    );
-    setInitialItems(filteredItems);
+    const searchedItems = await searchItems(name); // Utilize o método de busca da API
+    setInitialItems(searchedItems);
+  }, 300);
+
+  // Função de busca que chama o debounce
+  const handleSearch = (name: string) => {
+    debouncedSearch(name);
   };
+
+  React.useEffect(() => {
+    return () => {
+      debouncedSearch.cancel();
+    };
+  }, []);
 
   React.useEffect(() => {
     setInitialItems(items);

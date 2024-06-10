@@ -1,3 +1,4 @@
+//caso o usuario não tenha um registro para utilização da public api do json montaremos esse dados mockados
 export let items = [
   {
     id: 1,
