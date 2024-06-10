@@ -1,4 +1,4 @@
-export const items = [
+export let items = [
   {
     id: 1,
     name: "React",

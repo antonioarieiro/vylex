@@ -4,6 +4,7 @@ import Button from "@/components/button";
 import DscInput from "@/components/Input";
 import DscTextArea from "@/components/textArea";
 import TitleH2 from "@/components/typograph/Subtitle";
+import { items } from "../../utils/initialData";
 import {
   CardContainer,
   CardContainerBody,
@@ -35,6 +36,12 @@ const AddNewItem: React.FC = () => {
     console.log("success", success);
 
     if (success) {
+      const newItem = {
+        id: items.length > 0 ? items[items.length - 1].id + 1 : 1,
+        name: name,
+        description: description
+      };
+      items.push(newItem);
       showToast(true);
       setName("");
       setDescription("");
