@@ -31,8 +31,8 @@ const Modal: React.FC<Props> = ({
         </div>
         {children}
         <div className="w-full flex gap-4 justify-end items-end">
-          <Button text="Cancelar" type="subtle" onSubmit={onSave} />
-          <Button text="Salvar" type="normal" onSubmit={onCancel} />
+          <Button text="Cancelar" type="subtle" onSubmit={onCancel} />
+          <Button text="Salvar" type="normal" onSubmit={onSave} />
         </div>
       </Dsc.ModalBody>
     </Dsc.ModalContainer>

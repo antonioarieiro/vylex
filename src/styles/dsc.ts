@@ -128,19 +128,23 @@ export const ModalOverlayContainer = styled.div`
   position: absolute;
   top: 0px;
   left: 0px;
-  width: 100%;
-  height: 100%;
+  width: -webkit-fill-available;
+  height: -webkit-fill-available;
+  overflow: hidden;
   display: flex;
   justify-content: center;
   align-items: center;
 `;
 
 export const ModalContainer = styled.div`
+  top: -10px;
+  left: -10px;
   position: absolute;
   z-index: 10;
-  width: 100%;
+  width: -webkit-fill-available;
+  height: -webkit-fill-available;
+  overflow: hidden;
 
-  height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -158,4 +162,42 @@ export const ModalBody = styled.div`
   z-index: 100;
   width: fit-content;
   height: auto;
+`;
+
+export const Layout = styled.div`
+  //padding: 16px;
+  width: 100%;
+  height: 100%;
+`;
+
+export const LayoutHeader = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-bottom: 1px solid #ebecf0;
+  background-color: #ffffff;
+  padding: 10px;
+  background-color: #f0f0f0;
+  gap: 15px;
+`;
+
+export const LayoutBody = styled.div`
+  margin-top: 10px;
+  padding: 10px;
+`;
+
+export const NavItem = styled.nav`
+  display: flex;
+  color: #000;
+  font-weight: 600;
+  &:hover {
+    color: #0052cc;
+    font-weight: 600;
+  }
+`;
+
+export const ListContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
 `;

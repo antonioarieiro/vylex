@@ -35,7 +35,7 @@ export default function DesignSystem() {
   };
 
   return (
-    <div className="w-full h-[100vh] flex items-center flex-col justify-center gap-2">
+    <>
       {open && (
         <Modal
           title="Modal"
@@ -46,7 +46,7 @@ export default function DesignSystem() {
           <div>corpo do children do modal</div>
         </Modal>
       )}
-      <div className="flex flex-col  gap-4 ">
+      <div className="flex flex-col gap-4">
         <BreadCrumb path={path}></BreadCrumb>
         <div className="flex items-start gap-4">
           <Button text="Open Modal" type="normal" onSubmit={openModal} />
@@ -117,6 +117,6 @@ export default function DesignSystem() {
           </CardContainer>
         </div>
       </div>
-    </div>
+    </>
   );
 }

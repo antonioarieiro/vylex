@@ -1,18 +1,111 @@
-import Image from "next/image";
-import { Inter } from "next/font/google";
 import Button from "@/components/button";
-import DscInput from "@/components/Input";
-import DscTextArea from "@/components/textArea";
+import DefaultText from "@/components/typograph/DefaultText";
+import TitleH2 from "@/components/typograph/Subtitle";
+import {
+  ListContainer,
+  CardContainer,
+  CardContainerBody,
+  CardContainerFooter
+} from "@/styles/dsc";
+import { items } from "../utils/initialData";
+import Modal from "@/components/modal";
+import React from "react";
 
-const inter = Inter({ subsets: ["latin"] });
-
+interface Item {
+  id: number;
+  name: string;
+  description: string;
+}
 export default function Home() {
-  const handleChange = (e: any) => {
-    console.log("e", e);
+  const [openEditModal, setOpenEditModal] = React.useState(false);
+  const [initialItems, setInitialItems] = React.useState<Item[]>([]);
+  const [selectedData, setSelectedData] = React.useState<Item>({} as Item);
+  const handleEdit = (id: number) => {
+    return () => {
+      console.log(id);
+    };
   };
+
+  const handleDelete = (item: Item) => {
+    return () => {
+      setOpenEditModal(true);
+      setSelectedData(item);
+    };
+  };
+
+  const handleSaveDelete = () => {
+    setOpenEditModal(false);
+    console.log("asa", selectedData);
+    let filter = initialItems.filter((val: Item) => val.id !== selectedData.id);
+    console.log("filter", filter);
+    setInitialItems(filter);
+  };
+
+  const handleChangeModalDelete = () => {
+    setOpenEditModal(false);
+  };
+
+  const addNewItem = () => {
+    return () => {
+      console.log("oii");
+    };
+  };
+
+  React.useEffect(() => {
+    setInitialItems(items);
+  }, []);
+
   return (
-    <div className="w-full h-[90vh] flex items-center flex-col justify-center gap-2">
-      home
-    </div>
+    <>
+      <div className="flex items-center gap-4 w-full justify-end mb-4">
+        <Button
+          text="Adcionar item"
+          type="normal"
+          icon="add"
+          onSubmit={addNewItem()}
+        />
+      </div>
+      {openEditModal && selectedData && (
+        <Modal
+          title="Delete item"
+          open={openEditModal}
+          onSave={handleSaveDelete}
+          onCancel={handleChangeModalDelete}
+        >
+          <div>
+            Se você excluir este item, perderá todas as alterações realizadas.
+          </div>
+        </Modal>
+      )}
+      {initialItems && initialItems.length ? (
+        <ListContainer>
+          {initialItems.map((val: Item) => (
+            <CardContainer key={val.id}>
+              <TitleH2 text={val.name} />
+              <CardContainerBody>
+                <DefaultText text={val.description} />
+              </CardContainerBody>
+              <CardContainerFooter>
+                <Button
+                  text="Delete"
+                  type="subtle"
+                  onSubmit={handleDelete(val)}
+                />
+                <Button
+                  text="Editar"
+                  type="normal"
+                  icon="edit"
+                  onSubmit={handleEdit(val.id)}
+                />
+              </CardContainerFooter>
+            </CardContainer>
+          ))}
+        </ListContainer>
+      ) : (
+        <div className="flex items-center gap-4 w-full justify-center">
+          <TitleH2 text="Sem items na listagem" />
+        </div>
+      )}
+    </>
   );
 }
