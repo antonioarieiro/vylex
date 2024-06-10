@@ -14,7 +14,7 @@ import { useRouter } from "next/router";
 import DscInput from "@/components/Input";
 import DscTextArea from "@/components/textArea";
 import Toast from "@/components/toast";
-import { editItem } from "../api/api";
+import { deleteItem, editItem } from "../api/api";
 import BreadCrumb from "@/components/breadCrumb";
 
 interface Item {
@@ -49,8 +49,9 @@ export default function ListItems() {
     };
   };
 
-  const handleSaveDelete = () => {
+  const handleSaveDelete = async () => {
     setOpenDeleteModal(false);
+    await deleteItem(selectedData.id);
     let filter = initialItems.filter((val: Item) => val.id !== selectedData.id);
     setInitialItems(filter);
   };
@@ -102,6 +103,18 @@ export default function ListItems() {
     }));
   };
 
+  const handleSearch = (name: string) => {
+    if (!name) {
+      setInitialItems(items);
+      return;
+    }
+
+    const filteredItems = items.filter((item) =>
+      item.name.toLowerCase().includes(name.toLowerCase())
+    );
+    setInitialItems(filteredItems);
+  };
+
   React.useEffect(() => {
     setInitialItems(items);
   }, []);
@@ -110,13 +123,22 @@ export default function ListItems() {
     <>
       {toast && <Toast />}
       <BreadCrumb path={path} />
-      <div className="flex items-center gap-4 w-full justify-end mb-4">
-        <Button
-          text="Adcionar item"
-          type="normal"
-          icon="add"
-          onSubmit={addNewItem()}
-        />
+      <div className="flex items-end gap-4 w-full justify-end mb-4">
+        <div className="flex items-center w-auto">
+          <DscInput
+            onChange={handleSearch}
+            placeholder="Nome do item.."
+            label="Buscar"
+          />
+        </div>
+        <div className="">
+          <Button
+            text="Adcionar item"
+            type="normal"
+            icon="add"
+            onSubmit={addNewItem()}
+          />
+        </div>
       </div>
       {openDeleteModal && selectedData && (
         <Modal
