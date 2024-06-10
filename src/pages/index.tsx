@@ -14,7 +14,7 @@ import { useRouter } from "next/router";
 import DscInput from "@/components/Input";
 import DscTextArea from "@/components/textArea";
 import Toast from "@/components/toast";
-import { editItem } from "./api/api";
+import { deleteItem, editItem } from "./api/api";
 
 interface Item {
   id: number;
@@ -43,8 +43,9 @@ export default function Home() {
     };
   };
 
-  const handleSaveDelete = () => {
+  const handleSaveDelete = async () => {
     setOpenDeleteModal(false);
+    await deleteItem(selectedData.id);
     let filter = initialItems.filter((val: Item) => val.id !== selectedData.id);
     setInitialItems(filter);
   };

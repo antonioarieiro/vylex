@@ -80,3 +80,22 @@ export async function editItem(
     return false;
   }
 }
+
+
+export async function deleteItem(id: number): Promise<boolean> {
+  try {
+    const response = await axios.delete(
+      `https://jsonplaceholder.typicode.com/posts/${id}`
+    );
+
+    if (response.status !== 200) {
+      throw new Error("Erro ao deletar item");
+    }
+
+    console.log("Item deletado com sucesso!");
+    return true;
+  } catch (error) {
+    console.error("Erro ao deletar item:", error);
+    return false;
+  }
+}
