@@ -11,7 +11,7 @@ export const ButtonContainer = styled.button<ButtonProps>`
     disabled
       ? "#ccc"
       : type === "alert"
-      ? "#f1ca45"
+      ? "#ea6d6f"
       : type === "subtle"
       ? "none"
       : "#0052cc"};
@@ -45,6 +45,7 @@ export const InputContainer = styled.input`
 
 export const TextAreaContainer = styled.textarea`
   font-family: system-ui;
+  min-height: 150px;
   width: 100%;
   background-color: rgb(250, 251, 252);
   border-radius: 3px;
