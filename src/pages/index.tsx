@@ -118,6 +118,7 @@ export default function Home() {
           title="Delete item"
           open={openDeleteModal}
           onSave={handleSaveDelete}
+          type="alert"
           onCancel={handleChangeModalDelete}
         >
           <div>

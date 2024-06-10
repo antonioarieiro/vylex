@@ -157,6 +157,7 @@ export default function ListItems() {
           open={openDeleteModal}
           onSave={handleSaveDelete}
           onCancel={handleChangeModalDelete}
+          type="alert"
         >
           <div>
             Se você excluir este item, perderá todas as alterações realizadas.
