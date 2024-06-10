@@ -1,6 +1,10 @@
 
+Preview https://vylex-antonios-projects-66022abd.vercel.app/
+
 ## Configurações de Ambiente
 Para utilizar de maneira eficaz a API e poder monitorar as chamadas (GET, POST, UPDATE, DELETE), é necessário configurar o arquivo de ambiente (.env) com a chave de acesso.
+<br/>
+Testes de api e paginas em app.dev
 
 ## Métodos da API
 ### addNewItem(title: string, body: string): Promise<boolean>
