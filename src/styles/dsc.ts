@@ -77,6 +77,7 @@ export const inputLabel = styled.label`
 
 export const CardContainer = styled.div`
   gap: 10px;
+  background: #fff;
   border-radius: 3px;
   border-width: 2px;
   padding: 10px;
@@ -96,6 +97,7 @@ export const CardContainerFooter = styled.div`
 
 export const CardContainerBody = styled.div`
   gap: 4px;
+
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -105,11 +107,13 @@ export const BreadCrumb = styled.div`
   display: flex;
   align-items: center;
   gap: 2px;
+  font-size: 12px !important;
 `;
 
 export const ReturnLink = styled.p`
   font-weight: 400;
   font-family: system-ui;
+  font-size: 12px !important;
   &:hover {
     color: #0052cc;
     font-weight: 600;
@@ -117,6 +121,7 @@ export const ReturnLink = styled.p`
 `;
 
 export const CurrentPath = styled.p`
+  font-size: 12px !important;
   font-weight: 600;
   font-family: system-ui;
 `;
@@ -182,8 +187,12 @@ export const LayoutHeader = styled.div`
 `;
 
 export const LayoutBody = styled.div`
-  margin-top: 10px;
+  padding-top: 10px;
+  background: #eceff1;
   padding: 10px;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
 `;
 
 export const NavItem = styled.nav`
@@ -200,4 +209,18 @@ export const ListContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 4px;
+`;
+
+export const ToastContainer = styled.div`
+  display: flex;
+  position: absolute;
+  right: 0;
+  top: 10px;
+  background: green;
+  padding: 8px;
+  border-radius: 4px;
+  color: #fff;
+  gap: 4px;
+  display: flex;
+  align-items: center;
 `;

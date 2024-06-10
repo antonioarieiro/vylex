@@ -25,6 +25,7 @@ const DscInput: React.FC<Props> = ({
           id="input-text"
           placeholder={placeholder}
           onChange={(e: any) => onChange(e.target.value)}
+          value={value}
         />
         {icon && (
           <span className="material-symbols-outlined absolute right-1">

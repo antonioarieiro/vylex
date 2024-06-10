@@ -21,6 +21,7 @@ const DscTextArea: React.FC<Props> = ({
       <div className="relative flex items-center gap-2  w-full">
         <Dsc.TextAreaContainer
           id="input-text"
+          value={value}
           placeholder={placeholder}
           onChange={(e: any) => onChange(e.target.value)}
         />
