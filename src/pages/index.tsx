@@ -64,7 +64,11 @@ export default function Home() {
     const success = await editItem(id, name, description);
     if (success) {
       showToast(true);
-      setSelectedData({});
+      setSelectedData({
+        name: "",
+        description: "",
+        id: 0
+      });
       setTimeout(() => {
         showToast(false);
       }, 1000);
