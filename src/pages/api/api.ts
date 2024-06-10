@@ -16,7 +16,7 @@ export async function addNewItem(
     const data = {
       title: title,
       body: body,
-      userId: 9921845
+      userId: process.env.USER_ID
     };
     const response = await axios.post(
       "https://jsonplaceholder.typicode.com/posts",
@@ -38,7 +38,7 @@ export async function addNewItem(
 export async function getItems(): Promise<Item[]> {
   try {
     const response = await axios.get(
-      "https://jsonplaceholder.typicode.com/posts"
+      `https://jsonplaceholder.typicode.com/posts?userId=${process.env.USER_ID}`
     );
 
     if (response.status !== 200) {
@@ -81,7 +81,6 @@ export async function editItem(
   }
 }
 
-
 export async function deleteItem(id: number): Promise<boolean> {
   try {
     const response = await axios.delete(
@@ -97,5 +96,22 @@ export async function deleteItem(id: number): Promise<boolean> {
   } catch (error) {
     console.error("Erro ao deletar item:", error);
     return false;
+  }
+}
+
+export async function searchItems(searchText: string): Promise<Item[]> {
+  try {
+    const response = await axios.get<Item[]>(
+      `https://jsonplaceholder.typicode.com/posts?q=${searchText}`
+    );
+
+    if (response.status !== 200) {
+      throw new Error("Erro ao buscar itens");
+    }
+
+    return response.data;
+  } catch (error) {
+    console.error("Erro ao buscar itens:", error);
+    return [];
   }
 }
