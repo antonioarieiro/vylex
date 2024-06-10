@@ -10,6 +10,7 @@ import {
 import { items } from "../utils/initialData";
 import Modal from "@/components/modal";
 import React from "react";
+import { useRouter } from "next/router";
 
 interface Item {
   id: number;
@@ -20,6 +21,8 @@ export default function Home() {
   const [openEditModal, setOpenEditModal] = React.useState(false);
   const [initialItems, setInitialItems] = React.useState<Item[]>([]);
   const [selectedData, setSelectedData] = React.useState<Item>({} as Item);
+  const router = useRouter();
+
   const handleEdit = (id: number) => {
     return () => {
       console.log(id);
@@ -47,7 +50,7 @@ export default function Home() {
 
   const addNewItem = () => {
     return () => {
-      console.log("oii");
+      router.push("/new-item");
     };
   };
 

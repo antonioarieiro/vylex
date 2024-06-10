@@ -6,15 +6,17 @@ interface Props {
   text: string;
   type: string;
   icon?: string;
+  disabled?: boolean;
 }
 
-const Button: React.FC<Props> = ({ onSubmit, text, type, icon }) => {
+const Button: React.FC<Props> = ({ onSubmit, text, type, icon, disabled }) => {
   return (
     <Dsc.ButtonContainer
       type={type}
       onClick={() => {
         onSubmit();
       }}
+      disabled={disabled}
     >
       <div className="flex items-center gap-1">
         {text}
